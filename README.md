@@ -22,7 +22,7 @@ Backend: Node.js, Express.js
 Database: MySQL
 ORM: MySQL2 with Promise Pool
 Environment Config: dotenv
-Architecture: Modular (routes, controllers, utilities, models )
+Architecture: Modular (router, controller, utilities, models )
 Unique ID Generator: uuid
 
 ---

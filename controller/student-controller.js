@@ -1,4 +1,5 @@
 const StudentModel = require("../models/student-model");
+const EnrollmentModel = require("../models/enrollment-model");
 // function test form email
 function validateEmail(email) {
   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -47,6 +48,13 @@ const putStudent = (req, res) => {
 const deleteStudent = (req, res) => {
   StudentModel.getstudent(req.params.id).then((result) => {
     if (!result) return res.status(404).send("student whith id not found");
+  });
+  //check table Enrollments
+  EnrollmentModel.getEnrollmentStudent(req.params.id).then((result) => {
+    if (result)
+      return res
+        .status(409)
+        .send("Cannot delete student. They are enrolled in a course.");
   });
   StudentModel.deleteStudent(req.params.id).then((result) => {
     res.send(`student with id : ${req.params.id} deleted`);

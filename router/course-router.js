@@ -4,12 +4,12 @@ const courseController = require('../controller/course-controller');
 
 router.get("/:id" ,courseController.getcourse);
 
-router.get("/" , );
+router.get("/" ,courseController.getCourses);
 
-router.post("/" , );
+router.post("/" , courseController.postCourse);
 
-router.put("/:id" , );
+router.put("/:id" , courseController.putCourse);
 
-router.delete("/:id");
+router.delete("/:id" , courseController.deleteCourses);
 
 module.exports = router

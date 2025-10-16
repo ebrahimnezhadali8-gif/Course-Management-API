@@ -14,16 +14,15 @@ class StudentModel {
     ]);
     return result;
   };
-  // ADDED STUDENT
+  // ADD STUDENT
   static insertStudent = async (name, email) => {
     const id = uuidv4(); //create uuid
-    const emailValue = email ? email : null;
     const result = await pool.query(`call add_student(?,?,?)`, [
       id,
       name,
       email,
     ]);
-    return { id, name, email: emailValue };
+    return { id, name, email };
   };
   //UPDATE STUDENT
   static updateStudent = async (id, name, email) => {

@@ -17,10 +17,10 @@ const postCourse = (req, res) => {
   const { name, description } = req.body;
   //Checking the existence of the name or not less than three characters
   if (!name || name.length < 3) {
-    return res.status(404).send("name is required!");
+    return res.status(400).send("name is required!");
   }
   coursesModule.getCourseName(name).then((result) => {
-    if (!result) return res.status(404).send("courses whith id not found");
+    if (!result) return res.status(409).send("courses whith id not found");
   });
   if (!description) description = "";
 
@@ -33,7 +33,7 @@ const postCourse = (req, res) => {
 const putCourse = (req, res) => {
   const { name, description } = req.body;
   if (!name || name.length < 3) {
-    return res.status(404).send("name is required!");
+    return res.status(400).send("name is required!");
   }
   coursesModule.getCourseName(name).then((result) => {
     if (!result) return res.status(404).send("courses whith id not found");

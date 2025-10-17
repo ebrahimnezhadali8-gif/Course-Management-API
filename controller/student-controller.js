@@ -15,12 +15,12 @@ const postStudent = (req, res) => {
   const { name, email } = req.body;
   //Checking the existence of the name or not less than three characters
   if (!name || name.length < 3) {
-    return res.status(404).send("name and email is required!");
+    return res.status(400).send("name and email is required!");
   }
   // checking
   const emailValue = validateEmail(email);
   if (!emailValue) {
-    return res.status(404).send("name and email is required!");
+    return res.status(400).send("name and email is required!");
   }
   StudentModel.insertStudent(name, email).then((result) => {
     res.send(`Added student successfully name :${name} email:${email}`);

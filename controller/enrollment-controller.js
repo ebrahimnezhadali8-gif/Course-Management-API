@@ -20,11 +20,11 @@ const postEnrollment = (req, res) => {
     return res.status(400).send("student_id and course_id are required.");
   // check course in table courses
   StudentModel.getstudent(studentId).then((result) => {
-    if (!result) return res.status(404).send("Student not found.");
+    if (!result) return res.status(409).send("Student not found.");
   });
   //check student in table students
   CourseModel.getCourse(courseId).then((result) => {
-    if (!result) return res.status(404).send("Course not found.");
+    if (!result) return res.status(409).send("Course not found.");
   });
   EnrollmentModel.insertEnrollment(studentId, parseInt(courseId)).then(
     (result) => {

@@ -16,7 +16,7 @@ class CourseModel {
     const [result] = await pool.query(`select * from courses where name =?`, [
       name,
     ]);
-    return result;
+    return result[0];
   };
 //ADD COURSE
   static insertCourses = async (name, description) => {

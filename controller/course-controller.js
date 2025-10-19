@@ -45,7 +45,6 @@ const putCourse = async (req, res) => {
     return res.send(validateResult.error.details[0].message);
   }
   const course = await coursesModule.getCourse(parseInt(req.params.id));
-
   if (!course) return res.status(404).send("courses whith id not found");
 
   const result = await coursesModule.updateCourses(
@@ -55,7 +54,7 @@ const putCourse = async (req, res) => {
   );
   const upCourse = await CourseModel.getCourse(parseInt(req.params.id));
   console.log(upCourse);
-  res.send(_.pick(upCourse[0], ["name", "description"]));
+  res.send(_.pick(upCourse[0], ["name", "description", "date"]));
 };
 const deleteCourses = async (req, res) => {
   const course = await coursesModule.getCourse(parseInt(req.params.id));

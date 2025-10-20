@@ -1,64 +1,63 @@
 const StudentModel = require("../models/student-model");
 const EnrollmentModel = require("../models/enrollment-model");
-// function test form email
-function validateEmail(email) {
-  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return re.test(email);
-}
+const Joi = require("joi");
+const _ = require("lodash");
 
 const getStudents = (req, res) => {
   StudentModel.getStudents().then((result) => {
     res.send(result);
   });
 };
-const postStudent = (req, res) => {
+const postStudent = async (req, res) => {
   const { name, email } = req.body;
-  //Checking the existence of the name or not less than three characters
-  if (!name || name.length < 3) {
-    return res.status(400).send("name and email is required!");
-  }
-  // checking
-  const emailValue = validateEmail(email);
-  if (!emailValue) {
-    return res.status(400).send("name and email is required!");
-  }
-  StudentModel.insertStudent(name, email).then((result) => {
-    res.send(`Added student successfully name :${name} email:${email}`);
-  });
+  const schema = {
+    name: Joi.string().min(3).max(50).required(),
+    email: Joi.string().email().required(),
+  };
+  const validateResult = Joi.object(schema).validate(req.body);
+  if (validateResult.error)
+    return res.send(validateResult.error.details[0].message);
+
+  const student = await StudentModel.getStudentEmail(email);
+  console.log(student);
+  if (student) return res.status(400).send("email already registered");
+
+  const result = await StudentModel.insertStudent(name, email);
+  const newStudent = await StudentModel.getStudentEmail(email);
+  res.send(_.pick(newStudent, ["name", "email", "date"]));
 };
-const putStudent = (req, res) => {
+const putStudent = async (req, res) => {
   let { name, email } = req.body;
   //checking name
-  if (name === undefined || name === "") {
-    name = null;
-  } else if (name.length < 3) {
-    return res.status(400).send("Name must be at least 3 characters!");
-  }
-  //checking email
-  if (email === undefined || email === "") {
-    email = null;
-  } else if (!validateEmail(email)) {
-    return res.status(400).send("Invalid email format!");
-  }
+  const schema = {
+    name: Joi.string().min(3).max(50).required(),
+    email: Joi.string().email().allow("").optional(),
+  };
+  const validateResult = Joi.object(schema).validate(req.body);
+  if (validateResult.error)
+    return res.send(validateResult.error.details[0].message);
+  // check id
+  const student = await StudentModel.getStudent(parseInt(req.params.id));
+  if (!student) return res.status(404).send("student whith id not found");
 
-  StudentModel.updateStudent(req.params.id, name, email).then((result) => {
-    res.send(result);
-  });
+  const result = await StudentModel.updateStudent(req.params.id, name, email);
+
+  const upStudent = await StudentModel.getStudent(parseInt(req.params.id));
+  res.send(_.pick(upStudent, ["name", "email", "date"]));
 };
-const deleteStudent = (req, res) => {
-  StudentModel.getstudent(req.params.id).then((result) => {
-    if (!result) return res.status(404).send("student whith id not found");
-  });
+const deleteStudent = async (req, res) => {
+  const student = await StudentModel.getStudent(req.params.id);
+  if (!student) return res.status(404).send("student whith id not found");
+
   //check table Enrollments
-  EnrollmentModel.getEnrollmentStudent(req.params.id).then((result) => {
-    if (result)
-      return res
-        .status(409)
-        .send("Cannot delete student. They are enrolled in a course.");
-  });
-  StudentModel.deleteStudent(req.params.id).then((result) => {
-    res.send(`student with id : ${req.params.id} deleted`);
-  });
+  const enrollment = await EnrollmentModel.getEnrollmentStudent(req.params.id);
+  if (enrollment[0]) {
+    return res
+      .status(409)
+      .send("Cannot delete student. They are enrolled in a course.");
+  }
+  const deleted = await StudentModel.deleteStudent(req.params.id);
+  res.send(`student with id : ${req.params.id} deleted`);
 };
 
 module.exports = {

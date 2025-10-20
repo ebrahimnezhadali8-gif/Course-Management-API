@@ -61,8 +61,9 @@ const deleteCourses = async (req, res) => {
   if (!course) return res.status(404).send("courses whith id not found");
 
   //check table Enrollments
-  const enrollment = await EnrollmentModel.getEnrollmentStudent(req.params.id);
-  if (enrollment[0])
+  const enrollment = await EnrollmentModel.getEnrollmentCourse(req.params.id);
+
+  if (enrollment)
     return res
       .status(409)
       .send("Cannot delete course. They are enrolled in a student.");

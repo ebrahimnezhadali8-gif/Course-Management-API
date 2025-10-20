@@ -24,6 +24,8 @@ ORM: MySQL2 with Promise Pool
 Environment Config: dotenv
 Architecture: Modular (router, controller, utilities, models )
 Unique ID Generator: uuid
+Validation Library: Joi
+Utility Library: Lodash
 
 ---
 

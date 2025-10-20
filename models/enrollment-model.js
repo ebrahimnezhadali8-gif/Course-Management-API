@@ -19,6 +19,14 @@ class EnrollmentModel {
     );
     return result[0];
   };
+  //
+  static getEnrollmentCourseStudent = async (studentId, coursesId) => {
+    const [result] = await pool.query(`call get_enrollments_student_course(?,?) `, [
+      studentId,
+      coursesId,
+    ]);
+    return result[0];
+  };
   //ADD ENROLLMENTS
   static insertEnrollment = async (studentId, coursesId) => {
     const result = await pool.query(`call add_enroll(?,?)`, [

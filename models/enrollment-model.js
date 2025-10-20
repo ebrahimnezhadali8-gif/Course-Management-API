@@ -6,9 +6,17 @@ class EnrollmentModel {
     const [result] = await pool.query(`call get_enrollments()`);
     return result[0];
   };
-  // GET ENROLLMENTS WITH ID SPECIAL
+  // GET ENROLLMENTS WITH ID STUDENT SPECIAL
   static getEnrollmentStudent = async (id) => {
     const [result] = await pool.query(`call get_enrollments_student(?)`, [id]);
+    return result[0];
+  };
+  //GET ENROLLMENTS WITH ID COURSE SPECIAL
+  static getEnrollmentCourse = async (id) => {
+    const [result] = await pool.query(
+      `select * from enrollments where course_id = ?`,
+      [id]
+    );
     return result[0];
   };
   //ADD ENROLLMENTS

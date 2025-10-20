@@ -8,11 +8,19 @@ class StudentModel {
     return result[0];
   };
   // GET STUDENT WITH ID SPECIAL
-  static getstudent = async (id) => {
+  static getStudent = async (id) => {
     const [result] = await pool.query(`select * from students where id = ?`, [
       id,
     ]);
-    return result;
+    return result[0];
+  };
+  // GET STUDENT WITH EMAI SPECIAL
+  static getStudentEmail = async (email) => {
+    const [result] = await pool.query(
+      `select * from students where email = ? `,
+      [email]
+    );
+    return result[0];
   };
   // ADD STUDENT
   static insertStudent = async (name, email) => {
@@ -31,7 +39,7 @@ class StudentModel {
       name,
       email,
     ]);
-    return this.getstudent(id);
+    return this.getStudent(id);
   };
   //DELETE STUDENT
   static deleteStudent = async (id) => {

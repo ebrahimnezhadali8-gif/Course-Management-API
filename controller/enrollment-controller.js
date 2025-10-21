@@ -1,39 +1,40 @@
 const EnrollmentModel = require("../models/enrollment-model");
 const StudentModel = require("../models/student-model");
 const CourseModel = require("../models/course-model");
+const { trycatchHandler } = require("../utilities/trycatch_handler");
+const AppError = require("../utilities/app_error");
 
-const getEnrollment = (req, res) => {
-  EnrollmentModel.getEnrollments().then((result) => {
-    res.send(result);
-  });
-};
-const getEnrollmentStudent = (req, res) => {
-  EnrollmentModel.getEnrollmentStudent(req.params.id).then((result) => {
-    if (!result) return res.status(404).send("This not is student");
-    res.send(result);
-  });
-};
-const postEnrollment = async (req, res) => {
+const getEnrollment = trycatchHandler(async (req, res) => {
+  const result = await EnrollmentModel.getEnrollments();
+  res.send(result);
+});
+
+const getEnrollmentStudent = trycatchHandler(async (req, res) => {
+  const result = await EnrollmentModel.getEnrollmentStudent(req.params.id);
+  if (!result[0]) throw new AppError(104, "This not is student", 404);
+  res.send(result);
+});
+
+const postEnrollment = trycatchHandler(async (req, res) => {
   const { studentId, courseId } = req.params;
   //check id student and id course
   if (!studentId || !courseId)
-    return res.status(400).send("student_id and course_id are required.");
+    throw new AppError(100, "student_id and course_id are required.", 400);
   // check course in table courses
   const student = await StudentModel.getStudent(studentId);
-  if (!student) return res.status(404).send("Student not found.");
+  if (!student) throw new AppError(104, "Student not found.", 404);
 
   //check student in table students
   const course = await CourseModel.getCourse(courseId);
-  if (!course) return res.status(404).send("Course not found.");
+  if (!course[0]) throw new AppError(104, "Course not found.", 404);
 
   //check student with course table Enrollment
   const enrollment = await EnrollmentModel.getEnrollmentCourseStudent(
     studentId,
     parseInt(courseId)
   );
-  console.log(enrollment);
   if (enrollment[0])
-    return res.status(404).send("studend with Course registered.");
+    throw new AppError(109, "studend with Course registered.", 409);
   //add enrollment
   const result = await EnrollmentModel.insertEnrollment(
     studentId,
@@ -43,28 +44,31 @@ const postEnrollment = async (req, res) => {
     studentId,
     parseInt(courseId)
   );
-  res.send(newEnrollment[0]);
-};
-const deleteEnrollment = async (req, res) => {
+  res.status(201).send(newEnrollment[0]);
+});
+const deleteEnrollment = trycatchHandler(async (req, res) => {
   const { studentId, courseId } = req.params;
   if (!studentId || !courseId)
-    return res.status(400).send("student_id and course_id are required.");
+    throw new AppError(100, "student_id and course_id are required.", 400);
 
   //check student with course table Enrollment
   const enrollment = await EnrollmentModel.getEnrollmentCourseStudent(
     studentId,
     parseInt(courseId)
   );
-  if (!enrollment[0])
-    return res.status(404).send("studend with Course not found.");
+  if (!enrollment[0]) throw new AppError(104, "enrollment not is found", 404);
 
   const deleted = await EnrollmentModel.deleteEnrollment(
     studentId,
     parseInt(courseId)
   );
 
-  res.send(`deleted successfully student name : ${enrollment[0].name} in course : ${enrollment[0].course}!`);
-};
+  res
+    .status(200)
+    .send(
+      `deleted successfully student name : ${enrollment[0].name} in course : ${enrollment[0].course}!`
+    );
+});
 
 module.exports = {
   getEnrollment,

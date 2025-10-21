@@ -13,18 +13,15 @@ class EnrollmentModel {
   };
   //GET ENROLLMENTS WITH ID COURSE SPECIAL
   static getEnrollmentCourse = async (id) => {
-    const [result] = await pool.query(
-      `select * from enrollments where course_id = ?`,
-      [id]
-    );
+    const [result] = await pool.query(`call get_student_id(?)`, [id]);
     return result[0];
   };
   //
   static getEnrollmentCourseStudent = async (studentId, coursesId) => {
-    const [result] = await pool.query(`call get_enrollments_student_course(?,?) `, [
-      studentId,
-      coursesId,
-    ]);
+    const [result] = await pool.query(
+      `call get_enrollments_student_course(?,?) `,
+      [studentId, coursesId]
+    );
     return result[0];
   };
   //ADD ENROLLMENTS

@@ -27,7 +27,7 @@ module.exports = logger;
 
 // deleted file in 30 days
 const days = 24 * 60 * 60 * 1000; //Milliseconds to days
-function cleanOldLogs() {
+function cleanOldFile() {
   fs.readdirSync(logsDir).forEach((file) => {
     const filePath = path.join(logsDir, file);
     const fileAgeSeconds = (Date.now() - fs.statSync(filePath).mtimeMs) / days;
@@ -37,4 +37,4 @@ function cleanOldLogs() {
     }
   });
 }
-setInterval(cleanOldLogs, days);
+setInterval(cleanOldFile, days);

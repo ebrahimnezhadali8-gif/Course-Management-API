@@ -1,5 +1,10 @@
 const { createLogger, format, transports } = require("winston");
 const path = require("path");
+const fs = require("fs");
+
+const logsDir = path.join(__dirname, "../logs");
+const date = new Date().toISOString().split("T")[0];
+const logFileName = path.join(logsDir, `${date}.log`);
 
 const logger = createLogger({
   format: format.combine(
@@ -13,9 +18,23 @@ const logger = createLogger({
       level: "info",
     }),
     new transports.File({
-      filename: path.join(__dirname, "../logs/error.log"),
+      filename: logFileName,
       level: "error",
     }),
   ],
 });
 module.exports = logger;
+
+// deleted file in 30 days
+const days = 24 * 60 * 60 * 1000; //Milliseconds to days
+function cleanOldLogs() {
+  fs.readdirSync(logsDir).forEach((file) => {
+    const filePath = path.join(logsDir, file);
+    const fileAgeSeconds = (Date.now() - fs.statSync(filePath).mtimeMs) / days;
+    if (fileAgeSeconds > 30) {
+      fs.unlinkSync(filePath);
+      console.log(`Deleted old file: ${file}`);
+    }
+  });
+}
+setInterval(cleanOldLogs, days);

@@ -16,7 +16,7 @@ const getStudents = trycatchHandler(async (req, res) => {
 const postStudent = trycatchHandler(async (req, res) => {
   const { name, email } = req.body;
   const schema = {
-    name: Joi.string().min(3).max(50).required(),
+    name: Joi.string().trim().min(3).max(50).required(),
     email: Joi.string().email().required(),
   };
   const validateResult = Joi.object(schema).validate(req.body);
@@ -33,7 +33,7 @@ const putStudent = trycatchHandler(async (req, res) => {
   let { name, email } = req.body;
   //checking name
   const schema = {
-    name: Joi.string().min(3).max(50).required(),
+    name: Joi.string().trim().min(3).max(50).required(),
     email: Joi.string().email().allow("").optional(),
   };
   const validateResult = Joi.object(schema).validate(req.body);

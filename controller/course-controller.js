@@ -20,7 +20,7 @@ const postCourse = trycatchHandler(async (req, res) => {
   let { name, description } = req.body;
   //Checking the existence of the name or not less than three characters
   const schema = {
-    name: Joi.string().min(3).max(50).required(),
+    name: Joi.string().trim().min(3).max(50).required(),
     description: Joi.string().allow("").max(255),
   };
   const validateResult = Joi.object(schema).validate(req.body);
@@ -36,7 +36,7 @@ const postCourse = trycatchHandler(async (req, res) => {
 const putCourse = trycatchHandler(async (req, res) => {
   let { name, description } = req.body;
   const schema = {
-    name: Joi.string().min(3).max(50).required(),
+    name: Joi.string().trim().min(3).max(50).required(),
     description: Joi.string().allow("").max(255),
   };
   const validateResult = Joi.object(schema).validate(req.body);

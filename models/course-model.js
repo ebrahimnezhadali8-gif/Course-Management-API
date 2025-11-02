@@ -20,7 +20,7 @@ class CourseModel {
   };
 //ADD COURSE
   static insertCourses = async (name, description) => {
-    const result = await pool.query(`call add_course(?,?) `, [
+    const result = await pool.query(`call craete_course(?,?) `, [
       name,
       description,
     ]);

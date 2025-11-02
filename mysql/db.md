@@ -6,14 +6,14 @@ This system allows administrators to manage courses, teachers, and students.
 ---
 
 ## Features
-✅ User authentication (Admin / Teacher / Student)  
-✅ Course management  
-✅ Student enrollment  
-✅ Teacher assignment  
-✅ Role-based access control (RBAC)  
-✅ RESTful API following best practices  
-✅ Secure password hashing (bcrypt)  
-✅ Database logic powered by Stored Procedures
++ User authentication (Admin / Teacher / Student)  
++ Course management  
++ Student enrollment  
++ Teacher assignment  
++ Role-based access control (RBAC)  
++ RESTful API following best practices  
++ Secure password hashing (bcrypt)  
++ Database logic powered by Stored Procedures
 
 ---
 

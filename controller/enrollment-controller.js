@@ -1,5 +1,4 @@
 const EnrollmentModel = require("../models/enrollment-model");
-const StudentModel = require("../models/student-model");
 const CourseModel = require("../models/course-model");
 const { trycatchHandler } = require("../utilities/trycatch_handler");
 const AppError = require("../utilities/app_error");

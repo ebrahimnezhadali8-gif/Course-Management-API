@@ -39,6 +39,6 @@ Later, it can be expanded into a full system for managing students, teachers, an
 
 ```bash
 git clone https://github.com/ebrahimnezhadali8-gif/Course-Management-API.git
-cd Course-Management-API/backend
+cd Course-Management-API/back_end
 npm install
 npm start

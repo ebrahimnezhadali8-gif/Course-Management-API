@@ -1,0 +1,25 @@
+{
+  "name": "course-management-api",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "start" :  "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "ali",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.2.3",
+    "express": "^4.21.2",
+    "joi": "^18.0.1",
+    "jsonwebtoken": "^9.0.2",
+    "lodash": "^4.17.21",
+    "mysql2": "^3.15.2",
+    "nodemon": "^3.1.10",
+    "uuid": "^13.0.0",
+    "winston": "^3.18.3"
+  }
+}

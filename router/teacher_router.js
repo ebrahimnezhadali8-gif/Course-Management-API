@@ -1,14 +1,26 @@
 const express = require("express");
 const router = express.Router();
-const teacher_controller = require("../controller/teacher_controller");
+const teacherController = require("../controller/teacher_controller");
 const auth = require("../middlware/auth");
 
 // /courses/student?teacherId=id teacher&courseId=id course
 router.get(
-  "/courses/student",
+  "/course/student",
   auth.auth,
   auth.roleAuth("admin", "teacher"),
-  teacher_controller.getTeacherByCourseAndStudent
+  teacherController.getTeacherByCourseAndStudent
+);
+router.post(
+  "/course",
+  auth.auth,
+  auth.roleAuth("admin", "teacher"),
+  teacherController.putTeacherCourse
+);
+router.delete(
+  "/:teacher_id/course/:course_id",
+  auth.auth,
+  auth.roleAuth("admin"),
+  teacherController.deleteTeacherCourse
 );
 
 module.exports = router;

@@ -4,7 +4,7 @@
 # courses
 + get_courses() :   Getting the list of courses with a course id entry that displays all courses if it is null;
 + craete_course() :  Adding a new lesson by the admin with the entries name and description where the description can be null;
-+ update_course()  : Courses are updated by the admin, which has id and name and description entries, which may not be name and description, + and the previous value remains, and each of them can be changed;
++ update_course()  : Courses are updated by the admin, which has id and name and description entries, which may not be name and description, and the previous value remains, and each of them can be changed;
 + delete_course()  :  Deleting a lesson by admin ;
 
 ---
@@ -35,5 +35,5 @@
 + delete_user() : Delete user by admin
 
 ---
-# Important note: 
+* Important note: 
 Of course, deleting is not recommended. In order to avoid deleting important information, it is tried not to be deleted in the project, and other methods are used.

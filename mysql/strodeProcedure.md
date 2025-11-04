@@ -35,5 +35,5 @@
 + delete_user() : Delete user by admin
 
 ---
-* Important note: 
+# Important note: 
 Of course, deleting is not recommended. In order to avoid deleting important information, it is tried not to be deleted in the project, and other methods are used.

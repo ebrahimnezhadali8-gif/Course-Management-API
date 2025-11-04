@@ -32,3 +32,13 @@ Utility Library: Lodash
 Goal >>
 The goal of this project is to learn backend structure, MySQL stored procedures, and API design in a practical way.
 Later, it can be expanded into a full system for managing students, teachers, and courses
+
+---
+
+## How to Run
+
+```bash
+git clone https://github.com/ebrahimnezhadali8-gif/Course-Management-API.git
+cd Course-Management-API
+npm install
+npm start

@@ -1,6 +1,5 @@
 const CourseModel = require("../models/course-model");
 const coursesModule = require("../models/course-model");
-const EnrollmentModel = require("../models/enrollment-model");
 const Joi = require("joi");
 const _ = require("lodash");
 const { trycatchHandler } = require("../utilities/trycatch_handler");
@@ -16,6 +15,7 @@ const getCourses = trycatchHandler(async (req, res) => {
   const result = await coursesModule.getCourses();
   res.send(result);
 });
+//insert to table courses
 const postCourse = trycatchHandler(async (req, res) => {
   let { name, description } = req.body;
   //Checking the existence of the name or not less than three characters
@@ -26,13 +26,16 @@ const postCourse = trycatchHandler(async (req, res) => {
   const validateResult = Joi.object(schema).validate(req.body);
   if (validateResult.error) throw validateResult.error;
 
+  //check course
   const course = await coursesModule.getCourseName(name);
   if (course) throw new AppError(109, "Course already registered", 409);
 
+  //insert into table courses
   const result = await coursesModule.insertCourses(name, description);
   const newCourse = await coursesModule.getCourseName(name);
   res.status(201).send(_.pick(newCourse, ["name", "description", "date"]));
 });
+//update course by admin
 const putCourse = trycatchHandler(async (req, res) => {
   let { name, description } = req.body;
   const schema = {
@@ -54,17 +57,15 @@ const putCourse = trycatchHandler(async (req, res) => {
   res.status(200).send(_.pick(upCourse[0], ["name", "description", "date"]));
 });
 const deleteCourses = trycatchHandler(async (req, res) => {
-  const course = await coursesModule.getCourse(parseInt(req.params.id));
+  const courseId = parseInt(req.params.id);
+  if (isNaN(courseId)) throw new AppError(400, "Invalid course ID", 400);
+
+  const course = await coursesModule.getCourse(courseId);
   if (!course[0]) throw new AppError(104, "courses whith id not found", 404);
 
-  //check table Enrollments
-  const enrollment = await EnrollmentModel.getEnrollmentCourse(req.params.id);
+  const deleted = await coursesModule.deleteCourses(courseId);
 
-  if (enrollment)
-    throw new AppError (1200 , "Students chose this course"  , 500)
-  const deleted = await coursesModule.deleteCourses(parseInt(req.params.id));
-
-  res.status(200).send(`Course with id ${req.params.id} deleted `);
+  res.status(200).send(`Course with id ${courseId} deleted `);
 });
 module.exports = {
   getcourse,

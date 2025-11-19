@@ -21,10 +21,10 @@ This system allows administrators to manage courses, teachers, and students.
 
 Table (users , courses , student_course ,teacher_course)
 
- users : All users with specific roles 
- courses : Course information 
- course_student :  M:N relationship for students 
- course_teacher : M:N relationship for teachers 
++ users : All users with specific roles 
++ courses : Course information 
++ course_student :  M:N relationship for students 
++ course_teacher : M:N relationship for teachers 
 
 ---
 

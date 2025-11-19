@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="./css/student.css">
+</head>
+<body class="bg-light">
+    <div class="box">
+        <div class="row">
+            <div class="col-3">
+                <div class="text-student h5">Student</div>
+                <div class="menu">
+                    <a href="#profile" class="item active">
+                        <i class="bi bi-person-fill"></i>
+                        <div>Profile</div>
+                    </a>
+                    <a href="#update-profile" class="item">
+                        <i class="bi bi-person-fill-gear"></i>
+                        <div>Update Profile</div>
+                    </a>
+                    <a href="#add-course" class="item">
+                        <i class="bi bi-journal-plus"></i>
+                        <div>Add Course</div>
+                    </a>
+                    <a href="#courses" class="item">
+                        <i class="bi bi-journal-medical"></i>
+                        <div>Courses</div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-9 right">
+                <div class="h3 text-dashboard">Dashboard</div>
+                <div class="card mb-4" id="profile">
+                    <div class="d-flex justify-content-between box-profile">
+                        <div class="float-start p-4">
+                            <div class="h5">Profile</div>
+                            <div class="d-flex gap-4  justify-content-center align-items-center">
+                                <div>
+                                    <i class="bi bi-person-circle user-icon"></i>
+                                </div>
+                                <div>
+                                    <div class="mb-1 h5">Name</div>
+                                    <p class="mb-0 text-muted">user@example.com</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="float-end" id="update-profile">
+                            <button class="btn btn-primary btn-sm p-2">Update Profile</button>
+                        </div>
+                    </div>
+                </div>
+            <div class="card mb-4" id="add-course">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">Add Course</h5>
+                    <div class="row align-items-end">
+                        <div class="col-10">
+                            <div class="input-group">
+                            <input
+                            type="text"
+                            id="courseName"
+                            class="form-control"
+                            placeholder="Enter course name"/>
+                        </div>
+                    </div>
+                    <div class="col-2 ">
+                        <button class="btn btn-primary float-end">Add Course</button>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+            <div class="card mb-4 shadow-sm" id="courses">
+            <div class="card-body">
+              <h5 class="card-title mb-3">My Courses</h5>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Course Name</th>
+                    <th>Instructor</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="myCourses">
+                  <tr>
+                    <td>Web Development</td>
+                    <td>John Doe</td>
+                    <td><button class="btn btn-outline-primary btn-sm">View</button></td>
+                  </tr>
+                  <tr>
+                    <td>Database Systems</td>
+                    <td>Richard Roe</td>
+                    <td><button class="btn btn-outline-primary btn-sm">View</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+            <div class="card shadow-sm courses">
+            <div class="card-body">
+              <h5 class="card-title mb-3">All Courses</h5>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Course Name</th>
+                    <th>Instructor</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="allCourses">
+                  <tr>
+                    <td>Web Development</td>
+                    <td>John Doe</td>
+                    <td><button class="btn btn-outline-primary btn-sm">Enroll</button></td>
+                  </tr>
+                  <tr>
+                    <td>Data Structures</td>
+                    <td>Jane Smith</td>
+                    <td><button class="btn btn-outline-primary btn-sm">Enroll</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+     
+</body>
+</html>

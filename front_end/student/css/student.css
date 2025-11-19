@@ -1,0 +1,75 @@
+.box {
+    background-color: white;
+    border-radius: 5px;
+    margin: 50px 100px ;
+    padding: 20px 0px;
+}
+
+.item{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 10px;
+    font-size: 18px;
+    text-decoration: none;
+    color: #666;
+    padding: 15px 25px;
+}
+
+.item:hover{
+    background-color: #f7f6f6;
+}
+
+.active{
+    background-color: #f7f6f6;
+    color: rgb(0, 128, 255);
+    border-left: solid 4px rgb(0, 128, 255);
+}
+
+.right{
+    padding-right: 40px;
+}
+.text-student{
+    padding: 15px 30px;
+    color: #666;
+}
+
+#profile{
+    border: solid 1px #e7e7e7 ;
+}
+
+.text-dashboard{
+    color: #333;
+    padding-top: 10px;
+}
+
+.box-profile{
+    color: #333;
+}
+
+.user-icon{
+    font-size: 80px;
+    color: #c2c2c2;
+}
+
+#update-profile{
+    padding: 40px 25px;
+}
+
+#courses{
+    border: solid 1px #e7e7e7 ;
+}
+
+#add-course{
+    border: solid 1px #e7e7e7 ;
+}
+
+.courses{
+    border: solid 1px #e7e7e7 ;
+}
+
+@media (max-width : 1000px){
+    .box{
+        margin: 50px;
+    }
+}

@@ -1,4 +1,5 @@
 require("dotenv").config();
+const cors = require("cors")
 const express = require("express");
 const app = express();
 const courseRouter = require("./router/course-router");
@@ -8,6 +9,7 @@ const userRoute = require("./router/user_router");
 const teacherRoute = require("./router/teacher_router");
 const studentRouter = require("./router/student_course");
 
+app.use(cors())
 app.use(express.json());
 app.use("/api/courses", courseRouter);
 app.use("/api/auth", authRouter);

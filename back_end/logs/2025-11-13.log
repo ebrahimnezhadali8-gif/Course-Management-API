@@ -1,0 +1,12 @@
+{"level":"error","message":"AppError: email or password is invend | Code: 100 | Path: /api/auth/login","timestamp":"2025-11-13 13:11:53"}
+{"level":"error","message":"AppError: email or password is invend | Code: 100 | Path: /api/auth/login","timestamp":"2025-11-13 13:44:02"}
+{"level":"error","message":"AppError: email or password is invend | Code: 100 | Path: /api/auth/login","timestamp":"2025-11-13 13:44:02"}
+{"level":"error","message":"AppError: email or password is invend | Code: 100 | Path: /api/auth/login","timestamp":"2025-11-13 13:44:02"}
+{"level":"error","message":"AppError: email or password is invend | Code: 101 | Path: /api/auth/login","timestamp":"2025-11-13 13:47:44"}
+{"level":"error","message":"AppError: email or password is invend | Code: 101 | Path: /api/auth/login","timestamp":"2025-11-13 13:47:45"}
+{"level":"error","message":"AppError: email or password is invend | Code: 101 | Path: /api/auth/login","timestamp":"2025-11-13 13:47:45"}
+{"level":"error","message":"AppError: email or password is invend | Code: 101 | Path: /api/auth/login","timestamp":"2025-11-13 13:47:45"}
+{"level":"error","message":"AppError: email or password is invend | Code: 101 | Path: /api/auth/login","timestamp":"2025-11-13 13:48:40"}
+{"level":"error","message":"AppError: email or password is invend | Code: 101 | Path: /api/auth/login","timestamp":"2025-11-13 13:56:58"}
+{"level":"error","message":"AppError: email or password is invend | Code: 101 | Path: /api/auth/login","timestamp":"2025-11-13 13:57:42"}
+{"level":"error","message":"AppError: email or password is invend | Code: 101 | Path: /api/auth/login","timestamp":"2025-11-13 14:15:39"}

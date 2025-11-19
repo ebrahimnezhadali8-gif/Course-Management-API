@@ -40,18 +40,22 @@ const login = trycatchHandler(async (req, res) => {
 
   const { email, password } = validateResult.value;
   const user = await UserModel.getUserEmail(email);
-  if (!user[0]) throw new AppError(100, "email or password is invend", 400);
+  if (!user[0]) throw new AppError(101, "email or password is invend", 401);
 
   const validPassword = await bcrypt.compare(password, user[0].password);
   if (!validPassword)
-    throw new AppError(100, "email or password is invend", 400);
+    throw new AppError(101, "email or password is invend", 401);
 
   const token = jwt.sign(
     { id: user[0].id, role: user[0].role, email: user[0].email },
     process.env.SECRET_KEY,
     { expiresIn: "2h" } // Time Token
   );
-  res.header("Authorization", token).send(`hello ${user[0].name}`);
+  res.status(200).send({
+  message: `Welcome ${user[0].name}`,
+  token: token,
+  role: user[0].role,
+});
 });
 
 module.exports = {
